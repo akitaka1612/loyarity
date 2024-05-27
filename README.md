@@ -3,3 +3,10 @@ For a telecommunications giant, every unanswered ring spells potential disaster.
 This project tackles the challenge head-on. We're building a model to predict customer churn before the dial tone fades. By delving into the intricate tapestry of customer data – their demographics, account details, and service usage – we aim to pinpoint the telltale signs of a customer on the verge of disconnecting.
 
 The goal? Empower the company to proactively address customer needs, strengthen loyalty, and ultimately, transform those potential dropped calls into lasting connections.
+
+To run the web:
+1. Open project in your workspace, in terminal run:
+   ```bash
+   python customer_churn.py
+   ```
+2. Access `localhost:5000` in your browser.
