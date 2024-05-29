@@ -82,24 +82,36 @@ def predict():
     df_2 = pd.concat([df_1, new_df], ignore_index = True) 
 
     print(df_2)
-    # Group the tenure in bins of 12 months
-    labels = ["{0}-{1}".format(i, i + 11) for i in range(1, 72, 12)]
+    # # Group the tenure in bins of 12 months
+    # labels = ["{0}-{1}".format(i, i + 11) for i in range(1, 72, 12)]
     
-    df_2['tenure_group'] = pd.cut(df_2.tenure.astype(int), range(1, 80, 12), right=False, labels=labels)
-    #drop column customerID and tenure
-    df_2.drop(columns= ['customerID','tenure'], axis=1, inplace=True)   
-    
-    
+    # df_2['tenure_group'] = pd.cut(df_2.tenure.astype(int), range(1, 80, 12), right=False, labels=labels)
+    # #drop column customerID and tenure
+    # df_2.drop(columns= ['customerID','tenure'], axis=1, inplace=True)   
     
     
-    new_df__dummies = pd.get_dummies(df_2.drop(['Churn', 'MonthlyCharges', 'TotalCharges', 'SeniorCitizen'], axis=1))
-    new_df__dummies['MonthlyCharges'] = df_2['MonthlyCharges']
-    new_df__dummies['TotalCharges'] = df_2['TotalCharges']
-    new_df__dummies['SeniorCitizen'] = df_2['SeniorCitizen']
-    new_df__dummies = new_df__dummies[columns]
-    print(new_df__dummies.columns)
+    
+    # new_df__dummies = pd.get_dummies(df_2.drop(['Churn', 'MonthlyCharges', 'TotalCharges', 'SeniorCitizen'], axis=1))
+    # new_df__dummies['MonthlyCharges'] = df_2['MonthlyCharges']
+    # new_df__dummies['TotalCharges'] = df_2['TotalCharges']
+    # new_df__dummies['SeniorCitizen'] = df_2['SeniorCitizen']
+    # new_df__dummies = new_df__dummies[columns]
+    # print(new_df__dummies.columns)
 
     #final_df=pd.concat([new_df__dummies, new_dummy], axis=1)
+
+    df_transformed = df_2.copy()
+    # label encoding (binary variables)
+    label_encoding_columns = ['gender', 'Partner', 'Dependents', 'PaperlessBilling', 'PhoneService', 'Churn']
+
+    # encode categorical binary features using label encoding
+    for column in label_encoding_columns:
+        if column == 'gender':
+            df_transformed[column] = df_transformed[column].map({'Female': 1, 'Male': 0})
+        else: 
+            df_transformed[column] = df_transformed[column].map({'Yes': 1, 'No': 0}) 
+        
+        
         
     print('##############################')
     single = model.predict(new_df__dummies.tail(1))
