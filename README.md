@@ -4,9 +4,3 @@ This project tackles the challenge head-on. We're building a model to predict cu
 
 The goal? Empower the company to proactively address customer needs, strengthen loyalty, and ultimately, transform those potential dropped calls into lasting connections.
 
-To run the web:
-1. Open project in your workspace, in terminal run:
-   ```bash
-   python customer_churn.py
-   ```
-2. Access `localhost:5000` in your browser.
